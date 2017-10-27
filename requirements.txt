@@ -1,0 +1,13 @@
+fastcache==1.0.2
+Flask==0.12.2
+Flask-Cors==2.1.2
+Jinja2==2.9.6
+jsonschema==2.4.0
+python-dateutil==2.5.1
+pytz==2016.2
+PyYAML==3.11
+requests==2.12.4
+rope==0.9.4
+urllib3==1.22
+Werkzeug==0.12.2
+xlrd==0.9.4
