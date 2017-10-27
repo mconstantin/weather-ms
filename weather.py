@@ -1,6 +1,5 @@
 import sys
 
-
 from flask import Flask, request, abort, jsonify
 import requests
 from urllib3.exceptions import HTTPError
