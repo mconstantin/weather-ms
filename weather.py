@@ -61,11 +61,18 @@ def get_weather_report():
 
     data_points = []
     data_points_count = weeks * 7
+    end_date = mid_day_dt - timedelta(days=data_points_count)
+    if sys.version_info[0] < 3:
+        end_tstamp = time.mktime(end_date.timetuple())
+    else:
+        end_tstamp = end_date.timestamp()
 
     # seems that this DarkSky request only returns daily historical report for 1 day only
     # loop for all days from most recent one
-    for i in range(data_points_count):
+    i = 0
+    while True:
         mid_day_dt -= i * delta
+        i += 1
         if sys.version_info[0] < 3:
             tstamp = time.mktime(mid_day_dt.timetuple())
         else:
@@ -79,14 +86,18 @@ def get_weather_report():
             rsp = requests.get(DARKSKY_URL + DARKSKY_API_KEY + '/' + ",".join(path_args),
                                params={'exclude': ",".join(EXCLUDE_BLOCKS)})
 
-            if rsp is not None:
+            if rsp.status_code == requests.codes.ok:
                 data = rsp.json()
                 if data is not None:
                     data = data['daily']['data'][0]
+                    date = datetime.fromtimestamp(data['time'])
+                    data['date'] = date.strftime('%x')
+                    data_points.append(data)
         except HTTPError as e:
             app.logger.error("HTTP error: %s".format(str(e)))
 
-        data_points.append(data)
+        if i > data_points_count - 1 or data['time'] < end_tstamp:
+            break
 
     return jsonify({'data': data_points})
 
