@@ -2,7 +2,7 @@ gunicorn==19.7.1
 fastcache==1.0.2
 Flask==0.12.2
 Flask-Cors==2.1.2
-Jinja2==2.9.6
+Jinja2==2.11.3
 jsonschema==2.4.0
 python-dateutil==2.5.1
 pytz==2016.2
