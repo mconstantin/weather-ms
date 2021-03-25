@@ -6,7 +6,7 @@ Jinja2==2.9.6
 jsonschema==2.4.0
 python-dateutil==2.5.1
 pytz==2016.2
-PyYAML==3.11
+PyYAML==5.4
 requests==2.12.4
 rope==0.9.4
 urllib3==1.22
